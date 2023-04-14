@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>双向数据绑定</title>
+</head>
+<body>
+  <h2>数据1：</h2><span class="dom-1"></span>
+  <h2>数据2：</h2><span class="dom-2"></span>
+
+
+  
+</body>
+  <script src="./index.js"></script>
+  <script>
+    el = document.querySelector('.dom-1');
+    console.log(el,'el-1');
+    let data = {}
+    // setTimeout(()=>{
+      dataChange({
+        data:data,
+        tag:'dom-1',
+        dataKey:'one',
+        selector:'.dom-1'
+      })
+      dataChange({
+        data:data,
+        tag:'dom-2',
+        dataKey:'two',
+        selector:'.dom-2'
+      })
+    // },2000)
+    data.one = '11231';
+    // data.two = '11134234231';
+
+    // let obj = {}
+    // let el = document.querySelector('.dom-1');
+    // el.value = 1;
+    // Object.defineProperty(obj, 'val', {
+    //   get() {
+    //     console.log('取值');
+    //     return el.value
+    //   },
+    //   set(val){
+    //     // debugger
+    //     console.log(val);
+    //     document.querySelector('.dom-1').innerHTML = val;
+    //   }
+    // })
+    // obj.val = 3;
+    // console.log(obj.val);
+    // let el = document.querySelector('.dom-1');
+    // console.log(el.value);
+  </script>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>fecth-ajax</title>
+</head>
+<body>
+  <button>facth</button>
+  <script>
+    const but = document.querySelector('button');
+    but.onclick = function(){
+      fetch('http://localhost:8000/axios-server',{
+        method: 'POST',
+        headers: {
+          name:'zhouyi'
+        },
+        body:'id=zhouyi&pw=woaini'
+      }).then(response =>{
+        return response.json();
+      }).then(response => {
+        console.log(response);
+      })
+    }
+  </script>
+</body>
+</html>

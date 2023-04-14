@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSONp案例</title>
+</head>
+<body>
+  用户名: <input type="text">
+  <p></p>
+  <script>
+    const inp = document.querySelector('input');
+    const p = document.querySelector('p');
+    
+    function handle(data){
+      inp.style.border = "solid 5px #f00";
+      p.innerHTML = data.msg
+    }
+
+    inp.onblur = function(){
+      let username = this.value;
+      const script = document.createElement('script');
+      script.src = 'http://localhost:8000/JSONP-server';
+      document.body.appendChild(script)
+    }
+
+  </script>
+</body>
+</html>

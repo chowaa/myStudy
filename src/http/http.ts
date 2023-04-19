@@ -8,11 +8,11 @@ import axios,  { type AxiosRequestConfig } from "axios"
 // import StorageHandler from "../utils/StorageHandler";
 
 const instance = axios.create({
-  timeout: 100000,
-  baseURL: 'http://192.168.0.191:8888',
+  timeout: 10000,
+  baseURL: 'http://127.0.0.1:8888',
   headers: {
     "Content-Type": "application/json",
-    // "Cache-Control": "no-cache"
+    "Cache-Control": "no-cache"
   },
 })
 axios.defaults.baseURL = '/api'
@@ -51,7 +51,7 @@ instance.interceptors.request.use(
 // 添加响应拦截器
 instance.interceptors.response.use(
   response => {
-    console.log('11111');
+    // console.log('11111');
     
   // 对响应数据做点什么
   return response;
@@ -109,7 +109,7 @@ instance.interceptors.response.use(
   }
 );
 
-async function httpProxy<T = any>(config: AxiosRequestConfig): Promise<any> {
+async function httpProxy(config: AxiosRequestConfig): Promise<any> {
   const resData = await instance(config);
   return resData.data
 }

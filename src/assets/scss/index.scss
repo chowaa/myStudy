@@ -1,0 +1,100 @@
+@import './variables.scss';
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+p,
+blockquote,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+html,
+body,
+#app {
+  width: $compute-width;
+  height: 100%;
+  background-color: #f4f4f4;
+}
+fieldset,
+img {
+  border: 0;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+em {
+  font-style: normal;
+}
+
+input,
+button,
+select,
+textarea {
+  outline: none;
+}
+#app {
+  // font-family: Avenir, Helvetica, Arial, sans-serif;
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
+  // text-align: center;
+  color: #2c3e50;
+}
+
+//按钮样式
+.el-button {
+  border-radius: 2px;
+}
+//卡片
+.el-card__body {
+  padding: 0;
+}
+
+.el-pagination {
+  text-align: right;
+}
+
+//滚动
+.el-scrollbar__bar {
+  z-index: 10;
+}
+
+//右侧淡入样式
+.slide-fade-enter-active {
+  transition: all 1s ease;
+}
+
+.slide-fade-enter {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
+
+p {
+  text-align: justify;
+  text-justify: distribute;
+}
+
+//为了使文本段落左右两边对齐
+p {
+  word-wrap: break-word
+}

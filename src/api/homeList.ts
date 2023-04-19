@@ -7,7 +7,7 @@ export default class homeList {
   // constructor() {
   // }
   post(params: object){
-    const url = 'api/post'
+    const url = 'api/myPost'
     return http.post(url, params)
   }
   departmentList(params: object){

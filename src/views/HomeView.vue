@@ -17,10 +17,8 @@ const data = {
 }
 http.post(data).then((result) => {
   console.log(result.data);
-  
 }).catch((err) => {
   console.log(err);
-  
 });
 
 @Options({

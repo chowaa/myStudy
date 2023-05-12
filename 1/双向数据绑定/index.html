@@ -4,6 +4,53 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue2响应式原理</title>
+  <script src="./vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <span>name:</span><p id="name"></p>
+    <span>age:</span><p id="age"></p>
+    <input id="inputName" class="input" type="text">
+    <input id="inputAge" class="input" type="text">
+    <button class="button">按钮</button>
+  </div>
+  <script>
+    class domList {
+      constructor() {
+        this.name = document.querySelector('#name');
+        this.age = document.querySelector('#age');
+        this.inputName = document.querySelector('#inputName');
+        this.inputAge = document.querySelector('#inputAge');
+        this.button = document.querySelector('.button');
+        this.typeName();
+        this.typeAge();
+      }
+      // 键入姓名
+      typeName(){
+        this.inputName.addEventListener('keyup', (e) => {
+          this.name.innerHTML = e.target.value
+        })
+      }
+      // 键入年龄
+      typeAge(){
+        this.inputAge.addEventListener('keyup', (e) => {
+          this.age.innerHTML = e.target.value
+        })
+      }
+    }
+    const myDomList = new domList()
+  </script>
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>双向数据绑定</title>
 </head>
 <body>
@@ -54,4 +101,4 @@
     // let el = document.querySelector('.dom-1');
     // console.log(el.value);
   </script>
-</html>
+</html> -->

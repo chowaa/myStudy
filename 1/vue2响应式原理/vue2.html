@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue2响应式原理</title>
+  <script src="./vue2.js"></script>
+</head>
+<body>
+  <div id="app">
+    <span>name:</span><p id="name"></p>
+    <span>age:</span><p id="age"></p>
+  </div>
+  <script>
+    // 定义一个类
+    class data {
+      constructor() {
+        this.name = 'zhangsan'
+        this.age = 18
+      }
+    }
+    let data1 = new data()
+    // 写入name
+    function name() {
+      document.getElementById('name').innerHTML = data1.name
+    }
+    // 写入age
+    function age() {
+      document.getElementById('age').innerHTML = data1.age
+    }
+    observe(data1)
+    autoRun(name)
+    autoRun(age)
+  </script>
+</body>
+</html>

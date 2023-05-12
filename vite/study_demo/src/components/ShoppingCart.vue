@@ -64,6 +64,10 @@
       productData.map((item) => {
         allGoods.push(new commodityType(item));
       });
+      Object.defineProperty(this, 'allGoods', {
+        configurable: false,
+        enumerable: false,
+      })
       this.allGoods = allGoods;
       this.upToAmount = 30;
       this.deliveryFee = 5;
@@ -109,7 +113,7 @@
   }
   const cart = new ShoppingCartMethod();
   
-  const cartData = reactive(cart)
+  const cartData = reactive(cart) as ShoppingCartMethod;
 
   const ProductDataRef = reactive(productData);
   console.log(cartData);

@@ -156,6 +156,14 @@
         break;
     }
   }
+
+  let someValue: any = "this is a string";
+
+  let strLength: number = (<string>someValue).length;
+
+  console.log(someValue, strLength);
+  
+
 </script>
 
 <template>
@@ -164,11 +172,11 @@
     <div v-for="(item, index) in ProductDataRef" :key="index">
       <div>
         <span>商品名：{{ item.name }}&nbsp;&nbsp;&nbsp;</span>
-        <span>价格：{{ item.price }}&nbsp;&nbsp;&nbsp;</span>
+        <span>价格：￥{{ item.price }}&nbsp;&nbsp;&nbsp;</span>
         <span>数量：{{ cartData.allGoods[index].choose ? cartData.allGoods[index].choose : 0 }}</span>
       </div>
-      <button @click="button(index, 'increase')">添加第{{ index + 1 }}件商品</button>
-      <button @click="button(index, 'reduce')">减少第{{ index + 1 }}件商品</button>
+      <button @click="button(index, 'increase')">+</button>
+      <button @click="button(index, 'reduce')">-</button>
       <!-- <button @click="button(index, 'getTotalPrice')">获取第{{ index + 1}}件商品总价</button>
       <button @click="button(index, 'isChoose')">判断第{{ index + 1}}件商品是否选中</button>
       <button @click="button(index, 'getChoose')">获取第{{ index + 1}}件商品数量</button> -->

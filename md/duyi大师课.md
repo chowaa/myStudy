@@ -171,9 +171,125 @@ h合成线程会把 `quad` 提交给 `GPU` 进程，由 `GPU` 进程产生系统
 
 
 
+# vue常见优化手段
 
+- 使用key
 
+添加唯一标识符，稳定且唯一，建议使用 `id` 
 
+- 使用冻结对象
+
+被冻结之后的对象不会被响应化，减少不必要的操作
+
+- 使用函数式组件
+
+可以参考函数式组件
+
+- 使用计算属性
+
+可以缓存，依赖变化，数据也会变化
+
+- 非实时绑定的表单项
+
+`v-model` 会导致 `vue` 发生重渲染（ `rerender` ）
+
+可以使用 `lazy` 或者不使用 `v-model` 的方式解决该问题，但是会发生数据不一致
+
+- 保持对象引用稳定
+
+在绝大部分情况下， `vue` 触发 ` rerender` 的时机是其依赖的数据发生变化
+
+如果数据没有发生变化，就算是数据被重新赋值了，`vue`  也是不会做出任何处理
+
+```typescript
+function hasChanged(x: unkown, y: unkown) :boolen {
+    if(x === y) {
+        return x === 0 && 1 /x !== 1/y
+    } else {
+        return x === x || y === y
+    }
+}
+```
+
+ 只要保证组建的依赖数据不会发生变化，组件就不会重新渲染
+
+原始数据类型，保持值不变即可
+
+对象类型，保持引用不变
+
+- 使用 `v-show` 代替 `v-if`
+
+ 需要反复的加载，使用 `v-show` ，反之 `v-if`
+
+- 使用延迟装载（defer）
+
+`defer.js`
+
+```typescript
+import { Component, Vue } from 'vue-property-decorator';
+
+@Component
+export default class FrameControl extends Vue {
+  private frameCount: number = 0;
+
+  public mounted() {
+    const refreshFrameCount = () => {
+      requestAnimationFrame(() => {
+        this.frameCount++;
+        if (this.frameCount < this.maxFrameCount) {
+          refreshFrameCount();
+        }
+      });
+    };
+    refreshFrameCount();
+  }
+
+  public defer(showInFrameCount: number): boolean {
+    return this.frameCount >= showInFrameCount;
+  }
+
+  private get maxFrameCount(): number {
+    return this.$props.maxFrameCount || 60;
+  }
+}
+```
+
+这个代码使用了 `Vue Property Decorator` 库提供的装饰器语法，用于更方便地编写 `Vue` 组件。具体来说：
+
+- 我们使用 `@Component` 装饰器将类标记为 `Vue` 组件。
+- `frameCount` 属性不再需要在`data`方法中定义，而是直接作为类的私有属性。
+- 在mounted生命周期钩子函数中，我们定义了 `refreshFrameCount` 方法，它通过 `requestAnimationFrame `方法不断地更新 `frameCount` 属性的值，直到达到 `maxFrameCount` 的值为止。
+- `defer`方法的参数类型被指定为 `number` 类型。
+- 我们使用`getter`方法来获取`maxFrameCount`属性的值，从而避免直接访问`props`属性。
+
+下面是使用这个组件的示例代码：
+
+```vue
+<template>
+  <div>
+    <div v-if="defer(30)">这个内容将在第30帧时显示</div>
+    <div v-if="defer(60)">这个内容将在第60帧时显示</div>
+  </div>
+</template>
+
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import FrameControl from '@/components/FrameControl.vue';
+
+@Component
+export default class MyComponent extends Vue {
+  private get maxFrameCount(): number {
+    return 120;
+  }
+}
+</script>
+```
+
+在这个示例中，我们引入了上面定义的`FrameControl`组件，并将其作为父组件的子组件来使用。我们通过`getter`方法来获取最大帧数的值，并传递给`FrameControl`组件。在模板中使用defer方法来控制需要显示的内容。例如，当`frameCount`达到30时，第一个`div`就会显示出来，当`frameCount`达到60时，第二个div也会显示出来。
+
+- 使用keep-alive
+- 长列表优化
+- 打包体积优化
 
 
 
